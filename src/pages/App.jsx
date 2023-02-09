@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import '../utils/style/App.css';
 import Header from '../components/Header';
 import CreateEmployee from './CreateEmployee';
 import EmployeeList from './EmployeeList';
