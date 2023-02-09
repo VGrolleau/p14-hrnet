@@ -305,9 +305,24 @@ export const states = [
 ];
 
 export const departments = [
-    "Sales",
-    "Marketing",
-    "Engineering",
-    "Human Resources",
-    "Legal"
+    {
+        name: "Sales",
+        abbreviation: ""
+    },
+    {
+        name: "Marketing",
+        abbreviation: ""
+    },
+    {
+        name: "Engineering",
+        abbreviation: ""
+    },
+    {
+        name: "Human Resources",
+        abbreviation: ""
+    },
+    {
+        name: "Legal",
+        abbreviation: ""
+    }
 ];

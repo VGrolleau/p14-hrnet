@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Input from "../components/Input";
 import Select from "../components/Select";
-import { dataForm } from "../data";
+import { dataForm, states, departments } from "../data";
 
 function CreateEmployee() {
     useEffect(() => { document.title = "HRnet - Home" });
@@ -29,9 +29,6 @@ function CreateEmployee() {
         return (dataNameBloc, dataAddressBloc, dataDepartmentBloc);
     });
 
-    let stateSelect = document.getElementById("state");
-    let departmentSelect = document.getElementById("department");
-
     return (
         <section>
             <h2>Create employee</h2>
@@ -39,11 +36,7 @@ function CreateEmployee() {
             <form>
                 <div id="nameBloc">
                     {dataNameBloc.map(obj => {
-                        if (obj.category === "input") {
-                            return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
-                        } else {
-                            return <Select id={obj.id} label={obj.label} key={obj.id} />
-                        }
+                        return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
                     })}
                 </div>
 
@@ -54,18 +47,14 @@ function CreateEmployee() {
                         if (obj.category === "input") {
                             return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
                         } else {
-                            return <Select id={obj.id} label={obj.label} key={obj.id} />
+                            return <Select id={obj.id} label={obj.label} dataOptions={states} key={obj.id} />
                         }
                     })}
                 </fieldset>
 
                 <div id="departmentBloc">
                     {dataDepartmentBloc.map(obj => {
-                        if (obj.category === "input") {
-                            return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
-                        } else {
-                            return <Select id={obj.id} label={obj.label} key={obj.id} />
-                        }
+                        return <Select id={obj.id} label={obj.label} dataOptions={departments} key={obj.id} />
                     })}
                 </div>
 
