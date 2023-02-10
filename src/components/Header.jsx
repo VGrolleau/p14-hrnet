@@ -6,10 +6,12 @@ import Nav from './Nav';
 function Header() {
     return (
         <header>
-            <Link to="/">
-                <img src={wealthHealthLogo} alt="Wealth Health Logo" />
-            </Link>
-            <h1>HRnet</h1>
+            <div className='logo-title'>
+                <Link to="/">
+                    <img src={wealthHealthLogo} alt="Wealth Health Logo" />
+                </Link>
+                <h1>HRnet</h1>
+            </div>
             <Nav />
         </header>
     )

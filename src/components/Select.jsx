@@ -21,7 +21,8 @@ function Select(props) {
 
 Select.propTypes = {
     id: PropTypes.string,
-    label: PropTypes.string
+    label: PropTypes.string,
+    dataOptions: PropTypes.object
 };
 
 export default Select;
