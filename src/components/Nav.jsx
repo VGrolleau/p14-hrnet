@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import '../utils/style/Nav.css';
 
 function Nav() {
     return (
         <nav>
-            <Link to="/">Create employees</Link>
-            <Link to="/employee-list">View current employees</Link>
+            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Create employees</NavLink>
+            <NavLink to="/employee-list" className={({ isActive }) => (isActive ? "active" : "")}>View current employees</NavLink>
         </nav>
     )
 }
