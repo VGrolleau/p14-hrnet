@@ -1,0 +1,39 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto;
+    width: 45%;
+}
+
+#addressBloc .input {
+    width: 60%;
+}
+
+#addressBloc .input input {
+    border: none;
+}
+
+.input label {
+    margin-bottom: 10px;
+}
+
+.input input {
+    padding: 5px 10px;
+    border: solid 1px gray;
+    border-radius: 5px;
+}
+
+.input input:focus {
+    background-color: rgba(147, 173, 24, .2);
+    border: 1px solid rgb(147, 173, 24);
+    outline: none;
+    box-shadow: 0 0 10px rgb(90, 111, 8);
+}
+
+#addressBloc .input input:focus {
+    background-color: rgba(255,255,255,.75);
+}
+
+.input:focus-within label {
+    color: rgb(90, 111, 8);
+}

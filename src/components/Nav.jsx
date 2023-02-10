@@ -4,7 +4,7 @@ import '../utils/style/Nav.css';
 function Nav() {
     return (
         <nav>
-            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Create employees</NavLink>
+            <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>Create employee</NavLink>
             <NavLink to="/employee-list" className={({ isActive }) => (isActive ? "active" : "")}>View current employees</NavLink>
         </nav>
     )

@@ -1,0 +1,42 @@
+.create-employee-section {
+    padding: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    margin: 0;
+    color: rgb(109, 133, 9);
+    text-transform: capitalize;
+}
+
+form {
+    width: 50%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#nameBloc, #addressBloc, #departmentBloc {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#addressBloc {
+    margin: 15px 0;
+    background-color: rgba(90, 111, 8, .25);
+    border: none;
+    border-radius: 5px;
+}
+
+#addressBloc legend {
+    background-color: rgba(255,255,255,.75);
+    border-radius: 2px;
+    padding-inline: 5px;
+}
+
+#create-button {
+    width: min-content;
+    margin: auto;
+}

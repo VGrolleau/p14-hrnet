@@ -1,4 +1,5 @@
 import { PropTypes } from 'prop-types';
+import '../utils/style/Input.css';
 
 function Input(props) {
     const id = props.id;
@@ -6,7 +7,7 @@ function Input(props) {
     const type = props.type;
 
     return (
-        <div>
+        <div className='input'>
             <label htmlFor={id}>{label}</label>
             <input type={type} id={id} />
         </div>

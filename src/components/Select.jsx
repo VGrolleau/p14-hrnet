@@ -6,7 +6,7 @@ function Select(props) {
     const dataOptions = props.dataOptions;
 
     return (
-        <div>
+        <div className='custom-select'>
             <label htmlFor={id}>{label}</label>
             <select name={id} id={id}>
                 {
@@ -22,7 +22,7 @@ function Select(props) {
 Select.propTypes = {
     id: PropTypes.string,
     label: PropTypes.string,
-    dataOptions: PropTypes.object
+    dataOptions: PropTypes.array
 };
 
 export default Select;
