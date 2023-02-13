@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import DropdownMenu from "../components/DropdownMenu";
 import Input from "../components/Input";
-import Select from "../components/Select";
 import { dataForm, states, departments } from "../data";
 import '../utils/style/CreateEmployee.css';
 
@@ -54,22 +53,21 @@ function CreateEmployee() {
                 <fieldset className="address" id="addressBloc">
                     <legend>Address</legend>
 
-                    {dataAddressBloc.map(obj => {
+                    {dataAddressBloc.map((obj, index) => {
                         if (obj.category === "input") {
                             return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
                         }
                         else {
-                            /** TODO:
-                             * Retourner un DropdownMenu plutôt quand le problème du changement du texte du bouton sera réglé 
-                             */
-                            return <Select id={obj.id} label={obj.label} dataOptions={states} key={obj.id} />
+                            return <DropdownMenu id={obj.id} label={obj.label} dataOptions={states} key={`${obj.id}-${index}`} />
                         }
                     })}
                 </fieldset>
 
                 <div id="departmentBloc">
-                    {dataDepartmentBloc.map(obj => {
-                        return <DropdownMenu id={obj.id} label={obj.label} dataOptions={departments} key={obj.id} />
+                    {dataDepartmentBloc.map((obj, index) => {
+                        return (
+                            <DropdownMenu id={obj.id} label={obj.label} dataOptions={departments} key={`${obj.id}-${index}`} />
+                        )
                     })}
                 </div>
 

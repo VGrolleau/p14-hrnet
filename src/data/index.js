@@ -306,23 +306,168 @@ export const states = [
 
 export const departments = [
     {
-        name: "Sales",
-        abbreviation: ""
+        name: "Sales"
     },
     {
-        name: "Marketing",
-        abbreviation: ""
+        name: "Marketing"
     },
     {
-        name: "Engineering",
-        abbreviation: ""
+        name: "Engineering"
     },
     {
-        name: "Human Resources",
-        abbreviation: ""
+        name: "Human Resources"
     },
     {
-        name: "Legal",
-        abbreviation: ""
+        name: "Legal"
     }
 ];
+
+export const numberPerPage = [
+    {
+        name: "10"
+    },
+    {
+        name: "25"
+    },
+    {
+        name: "50"
+    },
+    {
+        name: "100"
+    }
+];
+
+export const mockedEmployees = [
+    {
+        firstName: "UserFirstname1",
+        lastName: "UserLastname1",
+        startDate: "01/02/2023",
+        department: "department1",
+        dateOfBirth: "02/03/1987",
+        street: "Street 1",
+        city: "City 1",
+        state: "State 1",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname2",
+        lastName: "UserLastname2",
+        startDate: "01/02/2023",
+        department: "department2",
+        dateOfBirth: "02/03/1987",
+        street: "Street 2",
+        city: "City 2",
+        state: "State 2",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname3",
+        lastName: "UserLastname3",
+        startDate: "01/02/2023",
+        department: "department3",
+        dateOfBirth: "02/03/1987",
+        street: "Street 3",
+        city: "City 3",
+        state: "State 3",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname4",
+        lastName: "UserLastname4",
+        startDate: "01/02/2023",
+        department: "department4",
+        dateOfBirth: "02/03/1987",
+        street: "Street 4",
+        city: "City 4",
+        state: "State 4",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname5",
+        lastName: "UserLastname5",
+        startDate: "01/02/2023",
+        department: "department5",
+        dateOfBirth: "02/03/1987",
+        street: "Street 5",
+        city: "City 5",
+        state: "State 5",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname6",
+        lastName: "UserLastname6",
+        startDate: "01/02/2026",
+        department: "department6",
+        dateOfBirth: "02/03/1987",
+        street: "Street 6",
+        city: "City 6",
+        state: "State 6",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname7",
+        lastName: "UserLastname7",
+        startDate: "01/02/2023",
+        department: "department7",
+        dateOfBirth: "02/03/1987",
+        street: "Street 7",
+        city: "City 7",
+        state: "State 7",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname8",
+        lastName: "UserLastname8",
+        startDate: "01/02/2023",
+        department: "department8",
+        dateOfBirth: "02/03/1987",
+        street: "Street 8",
+        city: "City 8",
+        state: "State 8",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname9",
+        lastName: "UserLastname9",
+        startDate: "01/02/2029",
+        department: "department9",
+        dateOfBirth: "02/03/1987",
+        street: "Street 9",
+        city: "City 9",
+        state: "State 9",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname10",
+        lastName: "UserLastname10",
+        startDate: "01/02/2023",
+        department: "department10",
+        dateOfBirth: "02/03/1987",
+        street: "Street 10",
+        city: "City 10",
+        state: "State 10",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname11",
+        lastName: "UserLastname11",
+        startDate: "01/02/2023",
+        department: "department11",
+        dateOfBirth: "02/03/1987",
+        street: "Street 11",
+        city: "City 11",
+        state: "State 11",
+        zipCode: 12345
+    },
+    {
+        firstName: "UserFirstname12",
+        lastName: "UserLastname12",
+        startDate: "01/02/20212",
+        department: "department12",
+        dateOfBirth: "02/03/1987",
+        street: "Street 12",
+        city: "City 12",
+        state: "State 12",
+        zipCode: 12345
+    },
+]

@@ -4,70 +4,60 @@
     margin: 10px auto;
     width: 45%;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 #addressBloc .custom-select {
     width: 60%;
 }
 
-#addressBloc .custom-select button {
-    border: none;
-}
-
 .custom-select label {
     margin-bottom: 10px;
 }
 
-.custom-select button {
+.choice-button {
     padding: 5px 10px;
     border: solid 1px gray;
     border-radius: 5px;
-}
-
-.custom-select button {
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
 }
 
 .custom-select:focus-within label {
     color: rgb(90, 111, 8);
 }
 
-.custom-select ul {
-    display: none;
-}
-
-.custom-select li {
+.list-item {
     width: 100%;
-    height: 100%;
     text-indent: 10px;
+    list-style: none;
 }
 
-.custom-select li:hover {
+.list-item:hover {
     background-color: rgba(90, 111, 8, .25);
 }
 
-.custom-select button:focus+ul {
-    padding: 2px 0;
+.dropdown-list {
+    padding: 5px 0;
     position: absolute;
     top: 20px;
-    width: 100%;
+    width: calc(100% - 2px);
+    max-height: 100px;
+    overflow: auto;
     display: flex;
-    justify-content: space-around;
     flex-direction: column;
     background-color: white;
     color: black;
-    list-style: none;
     border: solid 1px gray;
     border-radius: 5px;
     pointer-events: all;
     transform: translateY(20px);
 }
 
-.custom-select button:focus .select-arrow {
+.choice-button.open .select-arrow {
     transform: rotate(-180deg);
     transition: transform .5s ease-in-out;
 }
