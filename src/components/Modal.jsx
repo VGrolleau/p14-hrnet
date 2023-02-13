@@ -1,5 +1,9 @@
 function Modal() {
-    return
+    return (
+        <div>
+            <p>Fenêtre modale</p>
+        </div>
+    )
 }
 
 export default Modal;

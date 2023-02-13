@@ -31,11 +31,20 @@ function CreateEmployee() {
         return (dataNameBloc, dataAddressBloc, dataDepartmentBloc);
     });
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        alert("Employee created");
+        /** TODO:
+         * 1. Importer la modale qui contiendra "Employee created" (passer le texte en prop)
+         * 2. Envoyer les données dans redux pour pouvoir ajouter dans le tableau dans EmployeeList
+         */
+    };
+
     return (
         <section className="create-employee-section">
             <h2>Create employee</h2>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div id="nameBloc">
                     {dataNameBloc.map(obj => {
                         return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
@@ -50,7 +59,9 @@ function CreateEmployee() {
                             return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
                         }
                         else {
-                            {/* return <DropdownMenu id={obj.id} label={obj.label} dataOptions={states} key={obj.id} /> */ }
+                            /** TODO:
+                             * Retourner un DropdownMenu plutôt quand le problème du changement du texte du bouton sera réglé 
+                             */
                             return <Select id={obj.id} label={obj.label} dataOptions={states} key={obj.id} />
                         }
                     })}

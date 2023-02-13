@@ -6,6 +6,10 @@ function DropdownMenu(props) {
     const label = props.label;
     const dataOptions = props.dataOptions;
 
+    /** TODO:
+     * Gérer la récupération du texte dans le span du bouton
+     */
+
     // document.body.addEventListener('click', e => { console.log(e.target) })
 
     return (
