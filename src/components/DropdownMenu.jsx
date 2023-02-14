@@ -45,7 +45,7 @@ function DropdownMenu(props) {
     useOutsideAlerter(wrapperRef);
 
     return (
-        <div className='custom-select' ref={wrapperRef}>
+        <div className={isOpen ? 'custom-select open' : 'custom-select'} ref={wrapperRef}>
             <label htmlFor={id}>{label}</label>
             <div className={isOpen ? 'choice-button open' : 'choice-button'} onClick={toggling}>
                 <span>{selectedOption || defaultOption.name}</span>

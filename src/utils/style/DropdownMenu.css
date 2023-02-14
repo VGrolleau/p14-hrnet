@@ -26,8 +26,18 @@
     z-index: 1;
 }
 
-.custom-select:focus-within label {
+.custom-select.open label {
     color: rgb(90, 111, 8);
+}
+
+.custom-select .choice-button.open {
+    background-color: rgba(147, 173, 24, .2);
+    border: 1px solid rgb(147, 173, 24);
+    box-shadow: 0 0 10px rgb(90, 111, 8);
+}
+
+#addressBloc .custom-select .choice-button.open {
+    background-color: rgba(255,255,255, .7);
 }
 
 .list-item {
@@ -52,7 +62,8 @@
     background-color: white;
     color: black;
     border: solid 1px gray;
-    border-radius: 5px;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
     pointer-events: all;
     transform: translateY(20px);
 }
