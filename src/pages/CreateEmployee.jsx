@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DropdownMenu from "../components/DropdownMenu";
 import Input from "../components/Input";
+import Modal from "../components/Modal";
 import { dataForm, states, departments } from "../data";
 import '../utils/style/CreateEmployee.css';
 
 function CreateEmployee() {
     useEffect(() => { document.title = "HRnet - Home" });
+    const [modal, setModal] = useState(false);
+
+    const textModal = "Employee created!";
 
     let dataNameBloc = [];
     let dataAddressBloc = [];
@@ -30,13 +34,16 @@ function CreateEmployee() {
         return (dataNameBloc, dataAddressBloc, dataDepartmentBloc);
     });
 
+    const toggleModal = () => {
+        setModal(!modal);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert("Employee created");
         /** TODO:
-         * 1. Importer la modale qui contiendra "Employee created" (passer le texte en prop)
-         * 2. Envoyer les données dans redux pour pouvoir ajouter dans le tableau dans EmployeeList
+         * Envoyer les données dans redux pour pouvoir ajouter dans le tableau dans EmployeeList
          */
+        toggleModal();
     };
 
     return (
@@ -73,6 +80,9 @@ function CreateEmployee() {
 
                 <button id="create-button">Save</button>
             </form>
+            {modal && (
+                <Modal toggleModal={toggleModal} textModal={textModal} />
+            )}
         </section>
     )
 }
