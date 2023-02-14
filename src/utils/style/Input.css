@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
     margin: 10px auto;
-    width: 45%;
+    width: 85%;
 }
 
 #addressBloc .input {
-    width: 60%;
+    width: 90%;
 }
 
 #addressBloc .input input {
@@ -14,19 +14,20 @@
 }
 
 .input label {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: .8em;
 }
 
 .input input {
-    padding: 5px 10px;
+    padding: 2px 5px;
     border: solid 1px gray;
     border-radius: 5px;
+    outline: none;
 }
 
 .input input:focus {
     background-color: rgba(147, 173, 24, .2);
     border: 1px solid rgb(147, 173, 24);
-    outline: none;
     box-shadow: 0 0 10px rgb(90, 111, 8);
 }
 
@@ -36,4 +37,31 @@
 
 .input:focus-within label {
     color: rgb(90, 111, 8);
+}
+
+/* For devices with width between 769px and 1279px, like landscape tablets and laptops */
+@media only screen and (min-width: 769px) {
+    .input {
+        width: 70%;
+    }
+    #addressBloc .input {
+        width: 75%;
+    }
+    .input label {
+        margin-bottom: 10px;
+        font-size: 1em;
+    }
+    .input input {
+        padding: 5px 10px;
+    }
+} 
+
+/* For devices with width of 1280px and more, like desktop computers */
+@media only screen and (min-width: 1280px) {
+    .input {
+        width: 45%;
+    }
+    #addressBloc .input {
+        width: 60%;
+    }
 }
