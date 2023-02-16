@@ -26,11 +26,9 @@ header {
     header {
         padding: 20px 50px;
     }
-
     .logo-title img {
         width: 200px;
     }
-
     .logo-title h1 {
         font-size: 2em;
     }
@@ -41,17 +39,11 @@ header {
     header, .logo-title {
         flex-direction: row;
     }
-
     header {
         justify-content: space-between;
         padding: 20px 100px;
     }
-
     .logo-title img {
         width: 100px;
-    }
-
-    .logo-title h1 {
-        font-size: 2em;
     }
 }

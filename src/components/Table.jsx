@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import MaterialReactTable from 'material-react-table';
 import { PropTypes } from 'prop-types';
+import '../utils/style/Table.css';
 
 function Table(props) {
     const data = props.data;
@@ -29,6 +30,11 @@ function Table(props) {
                         backgroundColor: 'rgba(147, 173, 24, .2)',
                     },
                 }),
+            }}
+            muiTableProps={{
+                sx: {
+                    tableLayout: 'fixed',
+                },
             }}
         />
     );

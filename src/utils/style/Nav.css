@@ -10,7 +10,7 @@ nav {
     justify-content: space-around;
     flex-flow: column nowrap;
     z-index: 10;
-    position: absolute;
+    position: fixed;
     top: 20px;
 }
 
@@ -122,11 +122,9 @@ nav {
         width: 20%;
         margin: 0;
     }
-
     .hamburger {
         display: none;
     }
-
     .navigation {
         display: flex;
         justify-content: space-between;
@@ -134,15 +132,12 @@ nav {
         transform: translateX(0);
         opacity: 1;
     }
-
     .navigation a {
         margin: 0;
     }
-
     .navigation a:hover {
         transition: all .3s ease-in-out;
     }
-
     .navigation a:hover::after {
         transform: scaleX(1);
         transform-origin: bottom left;

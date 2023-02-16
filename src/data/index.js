@@ -322,21 +322,6 @@ export const departments = [
     }
 ];
 
-export const numberPerPage = [
-    {
-        name: "10"
-    },
-    {
-        name: "25"
-    },
-    {
-        name: "50"
-    },
-    {
-        name: "100"
-    }
-];
-
 export const mockedEmployees = [
     {
         firstName: "UserFirstname1",
@@ -470,4 +455,4 @@ export const mockedEmployees = [
         state: "State 12",
         zipCode: 12345
     },
-]
+];
