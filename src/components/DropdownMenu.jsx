@@ -12,9 +12,14 @@ function DropdownMenu(props) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
-    const toggling = () => setIsOpen(!isOpen);
+    const toggling = () => {
+        setIsOpen(!isOpen);
+        if (typeof storage !== "undefined") {
 
-    const onOptionClicked = value => () => {
+        }
+    }
+
+    const onOptionClicked = value => {
         setSelectedOption(value);
         setIsOpen(false);
     };
@@ -47,8 +52,8 @@ function DropdownMenu(props) {
     return (
         <div className={isOpen ? 'custom-select open' : 'custom-select'} ref={wrapperRef}>
             <label htmlFor={id}>{label}</label>
-            <div className={isOpen ? 'choice-button open' : 'choice-button'} onClick={toggling}>
-                <span>{selectedOption || defaultOption.name}</span>
+            <div className={isOpen ? 'choice-button open' : 'choice-button'} onClick={() => toggling()}>
+                <span id={id}>{selectedOption || defaultOption.name}</span>
                 <span className="fa-solid fa-angle-down select-arrow"></span>
             </div>
             {isOpen && (
@@ -56,7 +61,7 @@ function DropdownMenu(props) {
                     {
                         dataOptions.map((dataOption, index) => {
                             return (
-                                <li value={dataOption.name} className="list-item" onClick={onOptionClicked(dataOption.name)} key={index}>
+                                <li className="list-item" onClick={() => onOptionClicked(dataOption.name)} key={index}>
                                     {dataOption.name}
                                 </li>
                             )

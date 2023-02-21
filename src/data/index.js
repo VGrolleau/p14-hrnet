@@ -5,26 +5,30 @@ export const dataForm = [
                 id: "first-name",
                 label: "First Name",
                 category: "input",
-                type: "text"
+                type: "text",
+                settingFunction: "setFirstName"
             },
             {
                 id: "last-name",
                 label: "Last Name",
                 category: "input",
-                type: "text"
+                type: "text",
+                settingFunction: "setLastName"
             },
             {
                 id: "date-of-birth",
                 label: "Date of Birth",
                 category: "input",
-                type: "date"
+                type: "date",
+                settingFunction: "setDateOfBirth"
             },
             {
                 id: "start-date",
                 label: "Start Date",
                 category: "input",
-                type: "date"
-            },
+                type: "date",
+                settingFunction: "setStartDate"
+            }
         ]
     },
     {
@@ -33,7 +37,8 @@ export const dataForm = [
                 id: "street",
                 label: "Street",
                 category: "input",
-                type: "text"
+                type: "text",
+                settingFunction: "setStreet"
             },
             {
                 id: "city",
@@ -51,7 +56,7 @@ export const dataForm = [
                 label: "Zip Code",
                 category: "input",
                 type: "number"
-            },
+            }
         ]
     },
     {
@@ -454,5 +459,5 @@ export const mockedEmployees = [
         city: "City 12",
         state: "State 12",
         zipCode: 12345
-    },
+    }
 ];
