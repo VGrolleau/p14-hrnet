@@ -67,13 +67,12 @@ function CreateEmployee() {
         department: department
     });
 
-    const handleState = (newValue) => {
-        // TODO: Gérer la récupération de l'abréviation du state en fonction du name
+    const handleState = (newValue, newAbbreviation) => {
         if (!newValue) {
             setErrors((prevErrors) => ({ ...prevErrors, "state": "Please choose employee state" }));
         } else {
             setErrors((prevErrors) => ({ ...prevErrors, "state": "" }));
-            setState(newValue);
+            setState(newAbbreviation);
         }
     }
 
@@ -255,9 +254,7 @@ function CreateEmployee() {
 
                 <div id="departmentBloc">
                     {dataDepartmentBlock.map((obj, index) => {
-                        return (
-                            <DropdownMenu id={obj.id} label={obj.label} dataOptions={departments} error={errors[obj.id]} onUpdate={handleDepartment} key={`${obj.id}-${index}`} />
-                        )
+                        return <DropdownMenu id={obj.id} label={obj.label} dataOptions={departments} error={errors[obj.id]} onUpdate={handleDepartment} key={`${obj.id}-${index}`} />
                     })}
                 </div>
 

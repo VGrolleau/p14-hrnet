@@ -12,9 +12,9 @@ function DropdownMenu(props) {
 
     const toggling = () => setIsOpen(!isOpen);
 
-    const onOptionClicked = (value) => {
+    const onOptionClicked = (value, abbreviation) => {
         setSelectedOption(value);
-        onUpdate(value);
+        onUpdate(value, abbreviation);
         setIsOpen(false);
     };
 
@@ -56,7 +56,7 @@ function DropdownMenu(props) {
                     {
                         dataOptions.map((dataOption, index) => {
                             return (
-                                <li className="list-item" onClick={() => onOptionClicked(dataOption.name)} key={index}>
+                                <li className="list-item" onClick={() => onOptionClicked(dataOption.name, dataOption.abbreviation)} key={index}>
                                     {dataOption.name}
                                 </li>
                             )
