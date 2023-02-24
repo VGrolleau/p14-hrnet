@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DropdownMenu from "../components/DropdownMenu";
 import Input from "../components/Input";
 import Modal from "../components/Modal";
 import { dataForm, states, departments } from "../data";
-import { createEmployee, getOption } from "../redux";
+import { createEmployee } from "../redux";
 import '../utils/style/CreateEmployee.css';
 
 function CreateEmployee() {
@@ -19,43 +19,43 @@ function CreateEmployee() {
     const [zipCode, setZipCode] = useState('');
     const [department, setDepartment] = useState('');
     const [modal, setModal] = useState(false);
+    const [errors, setErrors] = useState({});
 
     let dispatch = useDispatch();
 
     const textModal = "Employee created!";
 
-    let dataNameBloc = [];
-    let dataAddressBloc = [];
-    let dataDepartmentBloc = [];
+    let dataNameBlock = [];
+    let dataAddressBlock = [];
+    let dataDepartmentBlock = [];
 
-    dataForm.map((bloc) => {
-        if (bloc.nameBloc) {
-            for (const obj of bloc.nameBloc) {
-                dataNameBloc.push(obj);
+    dataForm.map((block) => {
+        if (block.nameBloc) {
+            for (const obj of block.nameBloc) {
+                dataNameBlock.push(obj);
             }
         }
-        if (bloc.addressBloc) {
-            for (const obj of bloc.addressBloc) {
-                dataAddressBloc.push(obj);
+        if (block.addressBloc) {
+            for (const obj of block.addressBloc) {
+                dataAddressBlock.push(obj);
             }
         }
-        if (bloc.departmentBloc) {
-            for (const obj of bloc.departmentBloc) {
-                dataDepartmentBloc.push(obj);
+        if (block.departmentBloc) {
+            for (const obj of block.departmentBloc) {
+                dataDepartmentBlock.push(obj);
             }
         }
-        return (dataNameBloc, dataAddressBloc, dataDepartmentBloc);
+        return (dataNameBlock, dataAddressBlock, dataDepartmentBlock);
     });
 
     const toggleModal = () => {
         setModal(!modal);
     };
 
-    const employeesState = useSelector((state) => state.employee.employees);
-    // const optionState = useSelector((state) => state.employee.option);
+    const employeesSelector = useSelector((state) => state.employee.employees);
 
-    let employees = [...employeesState];
-    employees.push({
+    let newEmployees = [...employeesSelector];
+    newEmployees.push({
         firstName: firstName,
         lastName: lastName,
         dateOfBirth: dateOfBirth,
@@ -67,69 +67,150 @@ function CreateEmployee() {
         department: department
     });
 
-    const setChangeValue = (elementId, settingFunction) => {
-        document.getElementById(elementId).addEventListener("change", (e) => settingFunction(e.target.value));
+    const handleState = (newValue) => {
+        // setState(newValue);
+        if (!newValue) {
+            setErrors((prevErrors) => ({ ...prevErrors, "state": "Please choose employee state" }));
+        } else {
+            setErrors((prevErrors) => ({ ...prevErrors, "state": "" }));
+            setState(newValue);
+        }
     }
 
-    // let startStateText = "";
-    // let endStateText = "";
-    // let storage = undefined;
+    const handleDepartment = (newValue) => {
+        // setDepartment(newValue)
+        if (!newValue) {
+            setErrors((prevErrors) => ({ ...prevErrors, "department": "Please choose employee department" }));
+        } else {
+            setErrors((prevErrors) => ({ ...prevErrors, "department": "" }));
+            setDepartment(newValue);
+        };
+    }
 
-    window.addEventListener("load", () => {
-        setChangeValue("first-name", setFirstName);
-        setChangeValue("last-name", setLastName);
-        setChangeValue("date-of-birth", setDateOfBirth);
-        setChangeValue("start-date", setStartDate);
-        setChangeValue("street", setStreet);
-        setChangeValue("city", setCity);
-        setChangeValue("zip-code", setZipCode);
-        // setState(document.getElementById("state").textContent);
-        // setDepartment(document.getElementById("department").textContent);
-        // document.addEventListener("click", () => console.log(document.getElementById("state").textContent))
-        if (typeof storage !== "undefined") {
-            document.getElementById("state").addEventListener("change", console.log(document))
+    const regexText = /^[a-zA-Z]+$/;
+
+    const handleInput = (idValue, newValue) => {
+        switch (idValue) {
+            case "first-name":
+                if (!newValue) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "first-name": "Please enter employee first name" }));
+                }
+                else if (!newValue.match(regexText)) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "first-name": "Please enter valid first name" }));
+                }
+                else {
+                    setErrors((prevErrors) => ({ ...prevErrors, "first-name": "" }));
+                    setFirstName(newValue);
+                }
+                break;
+
+            case "last-name":
+                if (!newValue) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "last-name": "Please enter employee last name" }));
+                }
+                else if (!newValue.match(regexText)) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "last-name": "Please enter valid last name" }));
+                }
+                else {
+                    setErrors((prevErrors) => ({ ...prevErrors, "last-name": "" }));
+                    setLastName(newValue);
+                }
+                // setLastName(newValue)
+                break;
+            case "date-of-birth":
+                if (!newValue) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "date-of-birth": "Please choose a date of birth" }));
+                } else {
+                    setErrors((prevErrors) => ({ ...prevErrors, "date-of-birth": "" }));
+                    setDateOfBirth(newValue);
+                }
+                // setDateOfBirth(newValue)
+                break;
+            case "start-date":
+                if (!newValue) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "start-date": "Please choose a start date" }));
+                } else {
+                    setErrors((prevErrors) => ({ ...prevErrors, "start-date": "" }));
+                    setStartDate(newValue);
+                }
+                // setStartDate(newValue)
+                break;
+            case "street":
+                if (!newValue) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "street": "Please enter employee street" }));
+                } else {
+                    setErrors((prevErrors) => ({ ...prevErrors, "street": "" }));
+                    setStreet(newValue);
+                }
+                // setStreet(newValue)
+                break;
+            case "city":
+                if (!newValue) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "city": "Please enter employee city" }));
+                } else {
+                    setErrors((prevErrors) => ({ ...prevErrors, "city": "" }));
+                    setCity(newValue);
+                }
+                // setCity(newValue)
+                break;
+            case "zip-code":
+                if (!newValue) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "Please enter employee zip code" }));
+                } else {
+                    setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "" }));
+                    setZipCode(newValue);
+                }
+                // setZipCode(newValue)
+                break;
+
+            default:
+                break;
         }
-
-        // console.log(state);
-        // startStateText = document.getElementById("state").textContent;
-    })
-
-    // setTimeout(() => {
-    //     setChangeValue("first-name", setFirstName);
-    //     setChangeValue("last-name", setLastName);
-    //     setChangeValue("date-of-birth", setDateOfBirth);
-    //     setChangeValue("start-date", setStartDate);
-    //     setChangeValue("street", setStreet);
-    //     setChangeValue("city", setCity);
-    //     setChangeValue("zip-code", setZipCode);
-    //     // setState(document.getElementById("state").textContent);
-    //     // setDepartment(document.getElementById("department").textContent);
-    //     // document.addEventListener("click", () => console.log(document.getElementById("state").textContent))
-    //     // if (storage === undefined) {
-    //     //     document.getElementById("state").addEventListener("change", console.log(document))
-    //     // }
-
-    //     // console.log(state);
-    //     // startStateText = document.getElementById("state").textContent;
-
-    // }, 1);
-    // document.addEventListener("click", () => console.log(document.getElementById("state").textContent, state))
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        /** TODO:
-         * Envoyer les données dans redux pour pouvoir ajouter dans le tableau dans EmployeeList
-         */
-        // endStateText = document.getElementById("state").textContent;
-        // console.log(startStateText, endStateText);
-        // endStateText !== startStateText ? setState(endStateText) : setState(startStateText);
-        setState(document.getElementById("state").textContent);
-        setDepartment(document.getElementById("department").textContent);
-        // console.log(state);
-        console.log(document.getElementById("state").textContent, state, document.getElementById("department").textContent, department);
-        // console.log(employees);
-        // console.log(optionState);
-        // dispatch(createEmployee(employees));
+
+        const formErrors = {};
+        if (!firstName) {
+            formErrors["first-name"] = "Please enter employee first name";
+        } else if (!firstName.match(regexText)) {
+            formErrors["first-name"] = "Please enter valid first name";
+        }
+
+        if (!lastName) {
+            formErrors["last-name"] = "Please enter employee last name";
+        } else if (!lastName.match(regexText)) {
+            formErrors["last-name"] = "Please enter valid last name";
+        }
+        if (!dateOfBirth) {
+            formErrors["date-of-birth"] = "Please choose a date of birth";
+        }
+        if (!startDate) {
+            formErrors["start-date"] = "Please choose a start date";
+        }
+        if (!street) {
+            formErrors["street"] = "Please enter employee street";
+        }
+        if (!city) {
+            formErrors["city"] = "Please enter employee city";
+        }
+        if (!state) {
+            formErrors["state"] = "Please choose employee state";
+        }
+        if (!zipCode) {
+            formErrors["zip-code"] = "Please enter employee zip code";
+        }
+        if (!department) {
+            formErrors["department"] = "Please choose employee department";
+        }
+
+        // check other fields for errors here
+        if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+            return;
+        }
+        dispatch(createEmployee(newEmployees));
         toggleModal();
     };
 
@@ -139,28 +220,28 @@ function CreateEmployee() {
 
             <form onSubmit={handleSubmit}>
                 <div id="nameBloc">
-                    {dataNameBloc.map(obj => {
-                        return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
+                    {dataNameBlock.map((obj, index) => {
+                        return <Input id={obj.id} label={obj.label} type={obj.type} error={errors[obj.id]} onUpdate={handleInput} key={`${obj.id}-${index}`} />
                     })}
                 </div>
 
                 <fieldset className="address" id="addressBloc">
                     <legend>Address</legend>
 
-                    {dataAddressBloc.map((obj, index) => {
+                    {dataAddressBlock.map((obj, index) => {
                         if (obj.category === "input") {
-                            return <Input id={obj.id} label={obj.label} type={obj.type} key={obj.id} />
+                            return <Input id={obj.id} label={obj.label} type={obj.type} error={errors[obj.id]} onUpdate={handleInput} key={`${obj.id}-${index}`} />
                         }
                         else {
-                            return <DropdownMenu id={obj.id} label={obj.label} dataOptions={states} key={`${obj.id}-${index}`} />
+                            return <DropdownMenu id={obj.id} label={obj.label} dataOptions={states} error={errors[obj.id]} onUpdate={handleState} key={`${obj.id}-${index}`} />
                         }
                     })}
                 </fieldset>
 
                 <div id="departmentBloc">
-                    {dataDepartmentBloc.map((obj, index) => {
+                    {dataDepartmentBlock.map((obj, index) => {
                         return (
-                            <DropdownMenu id={obj.id} label={obj.label} dataOptions={departments} key={`${obj.id}-${index}`} />
+                            <DropdownMenu id={obj.id} label={obj.label} dataOptions={departments} error={errors[obj.id]} onUpdate={handleDepartment} key={`${obj.id}-${index}`} />
                         )
                     })}
                 </div>

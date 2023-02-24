@@ -4,30 +4,25 @@ import { useEffect, useRef, useState } from 'react';
 import '../utils/style/DropdownMenu.css';
 
 function DropdownMenu(props) {
-    const id = props.id;
-    const label = props.label;
-    const dataOptions = props.dataOptions;
-    const defaultOption = dataOptions[0];
+    const { id, label, dataOptions, error, onUpdate } = props;
+    const defaultOption = `Choose ${label}`;
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
-    const toggling = () => {
-        setIsOpen(!isOpen);
-        if (typeof storage !== "undefined") {
+    const toggling = () => setIsOpen(!isOpen);
 
-        }
-    }
-
-    const onOptionClicked = value => {
+    const onOptionClicked = (value) => {
         setSelectedOption(value);
+        onUpdate(value);
         setIsOpen(false);
     };
 
     /**
      * If the user clicks outside of the element, then set the state to false.
+     * @param {*} ref 
      */
-    const useOutsideAlerter = (ref) => {
+    const useOutsideAlert = (ref) => {
         useEffect(() => {
             /**
              * If the user clicks outside of the dropdown menu, then close the dropdown menu
@@ -47,13 +42,13 @@ function DropdownMenu(props) {
     }
 
     const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef);
+    useOutsideAlert(wrapperRef);
 
     return (
         <div className={isOpen ? 'custom-select open' : 'custom-select'} ref={wrapperRef}>
             <label htmlFor={id}>{label}</label>
-            <div className={isOpen ? 'choice-button open' : 'choice-button'} onClick={() => toggling()}>
-                <span id={id}>{selectedOption || defaultOption.name}</span>
+            <div className={isOpen ? 'choice-button open' : 'choice-button'} id={`choice-button-${id}`} onClick={() => toggling()}>
+                <span id={id}>{selectedOption || defaultOption}</span>
                 <span className="fa-solid fa-angle-down select-arrow"></span>
             </div>
             {isOpen && (
@@ -69,6 +64,7 @@ function DropdownMenu(props) {
                     }
                 </ul>
             )}
+            <p className='error-text'>{error}</p>
         </div>
     )
 };
