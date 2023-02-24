@@ -68,7 +68,7 @@ function CreateEmployee() {
     });
 
     const handleState = (newValue) => {
-        // setState(newValue);
+        // TODO: Gérer la récupération de l'abréviation du state en fonction du name
         if (!newValue) {
             setErrors((prevErrors) => ({ ...prevErrors, "state": "Please choose employee state" }));
         } else {
@@ -78,7 +78,6 @@ function CreateEmployee() {
     }
 
     const handleDepartment = (newValue) => {
-        // setDepartment(newValue)
         if (!newValue) {
             setErrors((prevErrors) => ({ ...prevErrors, "department": "Please choose employee department" }));
         } else {
@@ -88,17 +87,16 @@ function CreateEmployee() {
     }
 
     const regexText = /^[a-zA-Z]+$/;
+    const regexZip = /^\d{1,5}$/;
 
     const handleInput = (idValue, newValue) => {
         switch (idValue) {
             case "first-name":
                 if (!newValue) {
                     setErrors((prevErrors) => ({ ...prevErrors, "first-name": "Please enter employee first name" }));
-                }
-                else if (!newValue.match(regexText)) {
+                } else if (!newValue.match(regexText)) {
                     setErrors((prevErrors) => ({ ...prevErrors, "first-name": "Please enter valid first name" }));
-                }
-                else {
+                } else {
                     setErrors((prevErrors) => ({ ...prevErrors, "first-name": "" }));
                     setFirstName(newValue);
                 }
@@ -107,16 +105,14 @@ function CreateEmployee() {
             case "last-name":
                 if (!newValue) {
                     setErrors((prevErrors) => ({ ...prevErrors, "last-name": "Please enter employee last name" }));
-                }
-                else if (!newValue.match(regexText)) {
+                } else if (!newValue.match(regexText)) {
                     setErrors((prevErrors) => ({ ...prevErrors, "last-name": "Please enter valid last name" }));
-                }
-                else {
+                } else {
                     setErrors((prevErrors) => ({ ...prevErrors, "last-name": "" }));
                     setLastName(newValue);
                 }
-                // setLastName(newValue)
                 break;
+
             case "date-of-birth":
                 if (!newValue) {
                     setErrors((prevErrors) => ({ ...prevErrors, "date-of-birth": "Please choose a date of birth" }));
@@ -124,8 +120,8 @@ function CreateEmployee() {
                     setErrors((prevErrors) => ({ ...prevErrors, "date-of-birth": "" }));
                     setDateOfBirth(newValue);
                 }
-                // setDateOfBirth(newValue)
                 break;
+
             case "start-date":
                 if (!newValue) {
                     setErrors((prevErrors) => ({ ...prevErrors, "start-date": "Please choose a start date" }));
@@ -133,34 +129,39 @@ function CreateEmployee() {
                     setErrors((prevErrors) => ({ ...prevErrors, "start-date": "" }));
                     setStartDate(newValue);
                 }
-                // setStartDate(newValue)
                 break;
+
             case "street":
                 if (!newValue) {
                     setErrors((prevErrors) => ({ ...prevErrors, "street": "Please enter employee street" }));
+                } else if (!newValue.match(regexText)) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "street": "Please enter valid street" }));
                 } else {
                     setErrors((prevErrors) => ({ ...prevErrors, "street": "" }));
                     setStreet(newValue);
                 }
-                // setStreet(newValue)
                 break;
+
             case "city":
                 if (!newValue) {
                     setErrors((prevErrors) => ({ ...prevErrors, "city": "Please enter employee city" }));
+                } else if (!newValue.match(regexText)) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "city": "Please enter valid city" }));
                 } else {
                     setErrors((prevErrors) => ({ ...prevErrors, "city": "" }));
                     setCity(newValue);
                 }
-                // setCity(newValue)
                 break;
+
             case "zip-code":
                 if (!newValue) {
                     setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "Please enter employee zip code" }));
+                } else if (!newValue.match(regexZip)) {
+                    setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "Zip code must have max 5 numbers" }));
                 } else {
                     setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "" }));
                     setZipCode(newValue);
                 }
-                // setZipCode(newValue)
                 break;
 
             default:
@@ -183,24 +184,37 @@ function CreateEmployee() {
         } else if (!lastName.match(regexText)) {
             formErrors["last-name"] = "Please enter valid last name";
         }
+
         if (!dateOfBirth) {
             formErrors["date-of-birth"] = "Please choose a date of birth";
         }
+
         if (!startDate) {
             formErrors["start-date"] = "Please choose a start date";
         }
+
         if (!street) {
             formErrors["street"] = "Please enter employee street";
+        } else if (!street.match(regexText)) {
+            formErrors["street"] = "Please enter valid street";
         }
+
         if (!city) {
             formErrors["city"] = "Please enter employee city";
+        } else if (!city.match(regexText)) {
+            formErrors["city"] = "Please enter valid city";
         }
+
         if (!state) {
             formErrors["state"] = "Please choose employee state";
         }
+
         if (!zipCode) {
             formErrors["zip-code"] = "Please enter employee zip code";
+        } else if (!zipCode.match(regexZip)) {
+            formErrors["zip-code"] = "Please enter valid zip code";
         }
+
         if (!department) {
             formErrors["department"] = "Please choose employee department";
         }
@@ -210,6 +224,7 @@ function CreateEmployee() {
             setErrors(formErrors);
             return;
         }
+
         dispatch(createEmployee(newEmployees));
         toggleModal();
     };
