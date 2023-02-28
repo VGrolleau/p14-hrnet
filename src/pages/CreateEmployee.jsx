@@ -67,159 +67,135 @@ function CreateEmployee() {
         department: department
     });
 
-    const handleState = (newValue, newAbbreviation) => {
-        if (!newValue) {
-            setErrors((prevErrors) => ({ ...prevErrors, "state": "Please choose employee state" }));
-        } else {
-            setErrors((prevErrors) => ({ ...prevErrors, "state": "" }));
-            setState(newAbbreviation);
+    const errorMessages = {
+        firstName: {
+            verb: "enter",
+            name: "first name"
+        },
+        lastName: {
+            verb: "enter",
+            name: "last name"
+        },
+        dateOfBirth: {
+            verb: "choose",
+            name: "date of birth"
+        },
+        startDate: {
+            verb: "choose",
+            name: "start date"
+        },
+        street: {
+            verb: "enter",
+            name: "street"
+        },
+        city: {
+            verb: "enter",
+            name: "city"
+        },
+        state: {
+            verb: "choose",
+            name: "state"
+        },
+        zipCode: {
+            verb: "enter",
+            name: "zip code"
+        },
+        department: {
+            verb: "choose",
+            name: "department"
+        },
+    };
+
+    /**
+     * \p{L} : Unicode character class that corresponds to all letters of all languages.
+     * The u option at the end of the regex indicates that the regular expression uses Unicode characters.
+     * \-' : Corresponds to hyphens, apostrophes.
+     */
+    const regexText = /^[\p{L}\-']+$/u;
+
+    /**
+     * [\w] : Corresponds to an alphanumeric character (letter or number). The \w is a shortcut for [a-zA-Z0-9_]
+     */
+    const regexStreet = /^[\w]+/;
+    const regexZip = /^\d{1,5}$/;
+
+    const validateInput = (value, regex, errorMessage) => {
+        if (!value) {
+            return errorMessage;
         }
-    }
+        if (regex && !value.match(regex)) {
+            return "Please enter a valid value";
+        }
+        return "";
+    };
+
+    const setErrorFunction = (newValue, newAbbreviation = null, stringKey, errorMessage, regex = null, settingFunction) => {
+        const finalErrorMessage = validateInput(newValue, regex, errorMessage);
+        setErrors((prevErrors) => ({ ...prevErrors, [stringKey]: finalErrorMessage }));
+        if (!finalErrorMessage) {
+            typeof settingFunction === "function" && settingFunction(newAbbreviation ?? newValue);
+        }
+    };
+
+    const handleState = (newValue, newAbbreviation) => {
+        setErrorFunction(newValue, newAbbreviation, "state", `Please ${errorMessages.state.verb} employee ${errorMessages.state.name}`, null, setState);
+    };
 
     const handleDepartment = (newValue) => {
-        if (!newValue) {
-            setErrors((prevErrors) => ({ ...prevErrors, "department": "Please choose employee department" }));
-        } else {
-            setErrors((prevErrors) => ({ ...prevErrors, "department": "" }));
-            setDepartment(newValue);
-        };
-    }
-
-    const regexText = /^[a-zA-Z]+$/;
-    const regexZip = /^\d{1,5}$/;
+        setErrorFunction(newValue, null, "department", `Please ${errorMessages.department.verb} employee ${errorMessages.department.name}`, null, setDepartment);
+    };
 
     const handleInput = (idValue, newValue) => {
         switch (idValue) {
             case "first-name":
-                if (!newValue) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "first-name": "Please enter employee first name" }));
-                } else if (!newValue.match(regexText)) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "first-name": "Please enter valid first name" }));
-                } else {
-                    setErrors((prevErrors) => ({ ...prevErrors, "first-name": "" }));
-                    setFirstName(newValue);
-                }
+                setErrorFunction(newValue, null, "first-name", `Please ${errorMessages.firstName.verb} employee ${errorMessages.firstName.name}`, regexText, setFirstName);
                 break;
 
             case "last-name":
-                if (!newValue) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "last-name": "Please enter employee last name" }));
-                } else if (!newValue.match(regexText)) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "last-name": "Please enter valid last name" }));
-                } else {
-                    setErrors((prevErrors) => ({ ...prevErrors, "last-name": "" }));
-                    setLastName(newValue);
-                }
+                setErrorFunction(newValue, null, "last-name", `Please ${errorMessages.lastName.verb} employee ${errorMessages.lastName.name}`, regexText, setLastName);
                 break;
 
             case "date-of-birth":
-                if (!newValue) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "date-of-birth": "Please choose a date of birth" }));
-                } else {
-                    setErrors((prevErrors) => ({ ...prevErrors, "date-of-birth": "" }));
-                    setDateOfBirth(newValue);
-                }
+                setErrorFunction(newValue, null, "date-of-birth", `Please ${errorMessages.dateOfBirth.verb} employee ${errorMessages.dateOfBirth.name}`, null, setDateOfBirth);
                 break;
 
             case "start-date":
-                if (!newValue) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "start-date": "Please choose a start date" }));
-                } else {
-                    setErrors((prevErrors) => ({ ...prevErrors, "start-date": "" }));
-                    setStartDate(newValue);
-                }
+                setErrorFunction(newValue, null, "start-date", `Please ${errorMessages.startDate.verb} employee ${errorMessages.startDate.name}`, null, setStartDate);
                 break;
 
             case "street":
-                if (!newValue) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "street": "Please enter employee street" }));
-                } else if (!newValue.match(regexText)) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "street": "Please enter valid street" }));
-                } else {
-                    setErrors((prevErrors) => ({ ...prevErrors, "street": "" }));
-                    setStreet(newValue);
-                }
+                setErrorFunction(newValue, null, "street", `Please ${errorMessages.street.verb} employee ${errorMessages.street.name}`, regexStreet, setStreet);
                 break;
 
             case "city":
-                if (!newValue) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "city": "Please enter employee city" }));
-                } else if (!newValue.match(regexText)) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "city": "Please enter valid city" }));
-                } else {
-                    setErrors((prevErrors) => ({ ...prevErrors, "city": "" }));
-                    setCity(newValue);
-                }
+                setErrorFunction(newValue, null, "city", `Please ${errorMessages.city.verb} employee ${errorMessages.city.name}`, regexText, setCity);
                 break;
 
             case "zip-code":
-                if (!newValue) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "Please enter employee zip code" }));
-                } else if (!newValue.match(regexZip)) {
-                    setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "Zip code must have max 5 numbers" }));
-                } else {
-                    setErrors((prevErrors) => ({ ...prevErrors, "zip-code": "" }));
-                    setZipCode(newValue);
-                }
+                setErrorFunction(newValue, null, "zip-code", `Please ${errorMessages.zipCode.verb} employee ${errorMessages.zipCode.name}`, regexZip, setZipCode);
                 break;
 
             default:
                 break;
         }
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const formErrors = {};
-        if (!firstName) {
-            formErrors["first-name"] = "Please enter employee first name";
-        } else if (!firstName.match(regexText)) {
-            formErrors["first-name"] = "Please enter valid first name";
-        }
-
-        if (!lastName) {
-            formErrors["last-name"] = "Please enter employee last name";
-        } else if (!lastName.match(regexText)) {
-            formErrors["last-name"] = "Please enter valid last name";
-        }
-
-        if (!dateOfBirth) {
-            formErrors["date-of-birth"] = "Please choose a date of birth";
-        }
-
-        if (!startDate) {
-            formErrors["start-date"] = "Please choose a start date";
-        }
-
-        if (!street) {
-            formErrors["street"] = "Please enter employee street";
-        } else if (!street.match(regexText)) {
-            formErrors["street"] = "Please enter valid street";
-        }
-
-        if (!city) {
-            formErrors["city"] = "Please enter employee city";
-        } else if (!city.match(regexText)) {
-            formErrors["city"] = "Please enter valid city";
-        }
-
-        if (!state) {
-            formErrors["state"] = "Please choose employee state";
-        }
-
-        if (!zipCode) {
-            formErrors["zip-code"] = "Please enter employee zip code";
-        } else if (!zipCode.match(regexZip)) {
-            formErrors["zip-code"] = "Please enter valid zip code";
-        }
-
-        if (!department) {
-            formErrors["department"] = "Please choose employee department";
-        }
+        formErrors["first-name"] = validateInput(firstName, regexText, `Please ${errorMessages.firstName.verb} employee ${errorMessages.firstName.name}`);
+        formErrors["last-name"] = validateInput(lastName, regexText, `Please ${errorMessages.lastName.verb} employee ${errorMessages.lastName.name}`);
+        formErrors["date-of-birth"] = validateInput(dateOfBirth, null, `Please ${errorMessages.dateOfBirth.verb} employee ${errorMessages.dateOfBirth.name}`);
+        formErrors["start-date"] = validateInput(startDate, null, `Please ${errorMessages.startDate.verb} employee ${errorMessages.startDate.name}`);
+        formErrors["street"] = validateInput(street, regexText, `Please ${errorMessages.street.verb} employee ${errorMessages.street.name}`);
+        formErrors["city"] = validateInput(city, regexText, `Please ${errorMessages.city.verb} employee ${errorMessages.city.name}`);
+        formErrors["state"] = validateInput(state, null, `Please ${errorMessages.state.verb} employee ${errorMessages.state.name}`);
+        formErrors["zip-code"] = validateInput(zipCode, regexZip, `Please ${errorMessages.zipCode.verb} employee ${errorMessages.zipCode.name}`);
+        formErrors["department"] = validateInput(department, null, `Please ${errorMessages.department.verb} employee ${errorMessages.department.name}`);
 
         // check other fields for errors here
-        if (Object.keys(formErrors).length > 0) {
+        if (Object.keys(formErrors).some((key) => formErrors[key])) {
             setErrors(formErrors);
             return;
         }
