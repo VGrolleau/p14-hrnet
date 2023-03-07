@@ -1,6 +1,6 @@
+import { DropdownMenu } from "dropdown-menu-component";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DropdownMenu from "../components/DropdownMenu";
 import Input from "../components/Input";
 import Modal from "../components/Modal";
 import { dataForm, states, departments } from "../data";

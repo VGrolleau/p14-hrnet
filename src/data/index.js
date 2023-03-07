@@ -5,29 +5,25 @@ export const dataForm = [
                 id: "first-name",
                 label: "First Name",
                 category: "input",
-                type: "text",
-                settingFunction: "setFirstName"
+                type: "text"
             },
             {
                 id: "last-name",
                 label: "Last Name",
                 category: "input",
-                type: "text",
-                settingFunction: "setLastName"
+                type: "text"
             },
             {
                 id: "date-of-birth",
                 label: "Date Of Birth",
                 category: "input",
-                type: "date",
-                settingFunction: "setDateOfBirth"
+                type: "date"
             },
             {
                 id: "start-date",
                 label: "Start Date",
                 category: "input",
-                type: "date",
-                settingFunction: "setStartDate"
+                type: "date"
             }
         ]
     },
@@ -37,28 +33,24 @@ export const dataForm = [
                 id: "street",
                 label: "Street",
                 category: "input",
-                type: "text",
-                settingFunction: "setStreet"
+                type: "text"
             },
             {
                 id: "city",
                 label: "City",
                 category: "input",
-                type: "text",
-                settingFunction: "setCity"
+                type: "text"
             },
             {
                 id: "state",
                 label: "State",
-                category: "select",
-                settingFunction: "setState"
+                category: "select"
             },
             {
                 id: "zip-code",
                 label: "Zip Code",
                 category: "input",
-                type: "number",
-                settingFunction: "setZipCode"
+                type: "number"
             }
         ]
     },
@@ -67,8 +59,7 @@ export const dataForm = [
             {
                 id: "department",
                 label: "Department",
-                category: "select",
-                settingFunction: "setDepartment"
+                category: "select"
             }
         ]
     }
